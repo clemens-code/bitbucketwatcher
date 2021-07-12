@@ -29,16 +29,19 @@ deploy {
     serviceName = "bitbucketwatcher"
     default {
         dockerBuild()
-        dockerLogin {
-            registryRoot = property("registryRoot").toString()
-            loginMethod = net.mayope.deployplugin.tasks.DockerLoginMethod.AWS
-        }
         dockerPush {
             registryRoot = property("registryRoot").toString()
-            loginMethod = net.mayope.deployplugin.tasks.DockerLoginMethod.AWS
+            loginMethod = net.mayope.deployplugin.tasks.DockerLoginMethod.CLASSIC
+            loginUsername = property("dockerUser").toString()
+            loginPassword = property("dockerPswd").toString()
         }
         deploy {
             targetNamespaces = listOf(property("deployNameSpace").toString())
+        }
+        helmPush {
+            repositoryUrl = property("helmRepo").toString()
+            repositoryUsername = property("helmUser").toString()
+            repositoryPassword = property("helmPswd").toString()
         }
     }
 }
