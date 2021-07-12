@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: bitbucket-watcher
+
+teams:
+  url: ${teams-url}
+  readTimeout: 60
+  connectTimeout: 60
+
+bitbucket:
+  base-url: ${base-url}
+  readTimeout: 60
+  connectTimeout: 60
+  project-key: ${project-key}
+  repo-slug: ${repo-slug}
+  username: ${username}
+  password: ${password}
+  pull-request:
+    cron: 0 0/1 * ? * *
+  branch:
+    cron-check: 0 0/10 * ? * *
+    cron-clear: 0 0 7 ? * *
+
+

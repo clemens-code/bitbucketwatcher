@@ -1,0 +1,52 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+logs
+pull_request_id.groovy
+java_pid*
+
+### VIM ###
+*.swp
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Terraform ###
+.terraform
+workerprivate.key
+kubeconfig
+aws_auth.yaml
+src/k8s/terraform/aws-iam-authenticator.kubeconfig
+src/k8s/terraform/cert.pem
+src/k8s/terraform/key.pem
+src/k8s/terraform/output
+
+### docs
+docs/hugo/public
+docs/hugo/resources/_gen

@@ -1,0 +1,7 @@
+apiVersion: v2
+name: bitbucketwatcher
+description: A Helm chart for the BitbucketWatcher
+
+type: application
+
+version: 0.1.0
