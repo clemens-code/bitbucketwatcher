@@ -1,12 +1,13 @@
 # Bitbucketwacther 
 
-Der BitbucketWatcher dient zur überwachung eines Repositories. Dabei benachrichtigt er Nutzer, wenn es neue Pull-Requests, 
-Statusänderungen bei der Codereview oder gemergerte Pull-Requests gibt. 
-Außerdem werden Branches nach dem Mergen gelöscht, damit diese nicht unnötig herumliegen. 
-Sollte ein Branch mindesten eine Woche nicht mehr aktualisiert worden sein, werden Benachrichtigungen gesendet, 
-dass es einen veralteten und ungenutzen Branch gibt.
+The BitbucketWatcher is a helpful tool to keep up to date with updates on your repo. 
+The Watcher tracks new PullRequests, status changes on code reviews, merged branches and forgotten branches. 
 
-## Unterstützte Technologien
+- New opend PR’s
+- Review status change (per user) 
+- Merged pull requests 
+- Forgotten PR’s 
 
-- Bitbucket mit der API-Version 1.0
-- Teams 
+## Supported Technology
+
+At the time only Bitbucket with the API 1.0 and Teams are supported. 
