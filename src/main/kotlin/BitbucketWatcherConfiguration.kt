@@ -1,7 +1,5 @@
-package bitbucketwatcher
+package io.github.clemenscode.bitbucketwatcher
 
-import client.BitbucketClient
-import client.TeamsClient
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
@@ -10,6 +8,8 @@ import feign.Request
 import feign.auth.BasicAuthRequestInterceptor
 import feign.jackson.JacksonDecoder
 import feign.jackson.JacksonEncoder
+import io.github.clemenscode.bitbucketwatcher.client.BitbucketClient
+import io.github.clemenscode.bitbucketwatcher.client.TeamsClient
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan

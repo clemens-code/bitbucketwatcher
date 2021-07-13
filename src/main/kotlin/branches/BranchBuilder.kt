@@ -1,7 +1,7 @@
-package branches
+package io.github.clemenscode.bitbucketwatcher.branches
 
 import com.fasterxml.jackson.databind.node.ObjectNode
-import model.Branch
+import io.github.clemenscode.bitbucketwatcher.model.Branch
 import org.springframework.stereotype.Component
 
 private const val LAST_COMMIT_NODE = "com.atlassian.bitbucket.server.bitbucket-branch:latest-commit-metadata"

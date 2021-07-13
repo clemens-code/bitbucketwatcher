@@ -16,7 +16,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "9.4.1"
 
     // deployment
-    id("net.mayope.deployplugin") version ("0.0.50")
+    id("net.mayope.deployplugin") version ("0.0.51")
 
     // docs
     id("io.github.danakuban.docs-gradle-plugin") version ("1.0.2")
@@ -30,18 +30,18 @@ deploy {
     default {
         dockerBuild()
         dockerPush {
-            registryRoot = property("registryRoot").toString()
-            loginMethod = net.mayope.deployplugin.tasks.DockerLoginMethod.CLASSIC
-            loginUsername = property("dockerUser").toString()
-            loginPassword = property("dockerPswd").toString()
+            registryRoot = property("registryRoot").toString() ?: ""
+            loginMethod = net.mayope.deployplugin.tasks.DockerLoginMethod.DOCKERHUB
+            loginUsername = property("dockerUser").toString() ?: ""
+            loginPassword = property("dockerPswd").toString() ?: ""
         }
         deploy {
             targetNamespaces = listOf(property("deployNameSpace").toString())
         }
         helmPush {
-            repositoryUrl = property("helmRepo").toString()
-            repositoryUsername = property("helmUser").toString()
-            repositoryPassword = property("helmPswd").toString()
+            repositoryUrl = property("helmRepo").toString() ?: ""
+            repositoryUsername = property("helmUser").toString() ?: ""
+            repositoryPassword = property("helmPswd").toString() ?: ""
         }
     }
 }

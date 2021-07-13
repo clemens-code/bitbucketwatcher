@@ -1,16 +1,16 @@
 package de.otto.bitbucketwatcher.pullrequest
 
-import model.ReviewerStatus as ReviewerStatus1
-import branches.BranchDeleter
-import client.TeamsClient
-import client.TeamsMessageBuilder
+import io.github.clemenscode.bitbucketwatcher.branches.BranchDeleter
+import io.github.clemenscode.bitbucketwatcher.client.TeamsClient
+import io.github.clemenscode.bitbucketwatcher.client.TeamsMessageBuilder
+import io.github.clemenscode.bitbucketwatcher.model.PullRequest
+import io.github.clemenscode.bitbucketwatcher.model.ReviewerStatus
+import io.github.clemenscode.bitbucketwatcher.pullrequest.checker.MergedPullRequestChecker
 import io.mockk.clearAllMocks
 import io.mockk.mockk
 import io.mockk.verify
-import model.PullRequest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import pullrequest.checker.MergedPullRequestChecker
 
 class MergedPullRequestCheckerTest {
 
@@ -28,7 +28,7 @@ class MergedPullRequestCheckerTest {
     @Test
     fun mergedPullRequest() {
         val updateTime = 1213456L
-        val reviewer = ReviewerStatus1("\"testReviewer\"", "\"APPROVED\"")
+        val reviewer = ReviewerStatus("\"testReviewer\"", "\"APPROVED\"")
         val pullRequest =
             PullRequest("\"123\"", "\"test-PR\"", "branchId", "\"testAuthor\"", updateTime, listOf(reviewer))
         mergedPullRequestChecker.publishMergedPullRequests(
@@ -42,7 +42,7 @@ class MergedPullRequestCheckerTest {
     @Test
     fun notMergedPullRequest() {
         val updateTime = 1213456L
-        val reviewer = ReviewerStatus1("\"testReviewer\"", "\"APPROVED\"")
+        val reviewer = ReviewerStatus("\"testReviewer\"", "\"APPROVED\"")
         val pullRequest =
             PullRequest("\"321\"", "\"test-PR\"", "branchId", "\"testAuthor\"", updateTime, listOf(reviewer))
         mergedPullRequestChecker.publishMergedPullRequests(
@@ -55,7 +55,7 @@ class MergedPullRequestCheckerTest {
 
     private fun getMergedPullRequests(): List<PullRequest> {
         val updateTime = 1213456L
-        val reviewer = ReviewerStatus1("\"testReviewer\"", "\"APPROVED\"")
+        val reviewer = ReviewerStatus("\"testReviewer\"", "\"APPROVED\"")
         val pullRequest1 =
             PullRequest("\"123\"", "\"test-PR\"", "branchId", "\"testAuthor\"", updateTime, listOf(reviewer))
         val pullRequest2 =

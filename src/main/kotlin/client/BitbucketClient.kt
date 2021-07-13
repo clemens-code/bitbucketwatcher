@@ -1,10 +1,10 @@
-package client
+package io.github.clemenscode.bitbucketwatcher.client
 
 import com.fasterxml.jackson.databind.node.ObjectNode
 import feign.Headers
 import feign.Param
 import feign.RequestLine
-import model.BranchDeleteRequestModel
+import io.github.clemenscode.bitbucketwatcher.model.BranchDeleteRequestModel
 
 private const val URL_PATH = "rest/api/1.0/projects/{project}/repos/{reposlug}"
 private const val BRANCH_DELETE_URL = "rest/branch-utils/1.0/projects/{project}/repos/{reposlug}"

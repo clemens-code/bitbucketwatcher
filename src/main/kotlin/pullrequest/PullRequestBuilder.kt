@@ -1,9 +1,9 @@
-package pullrequest
+package io.github.clemenscode.bitbucketwatcher.pullrequest
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.ObjectNode
-import model.PullRequest
-import model.ReviewerStatus
+import io.github.clemenscode.bitbucketwatcher.model.PullRequest
+import io.github.clemenscode.bitbucketwatcher.model.ReviewerStatus
 import org.springframework.stereotype.Component
 
 @Component

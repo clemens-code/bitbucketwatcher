@@ -1,18 +1,15 @@
-package de.otto.bitbucketwatcher.branches
+package io.github.clemenscode.bitbucketwatcher.branches
 
-import branches.BranchBuilder
-import branches.BranchCheckScheduler
-import branches.BranchDeleter
-import client.BitbucketClient
-import client.TeamsClient
-import client.TeamsMessageBuilder
 import com.fasterxml.jackson.databind.node.JsonNodeFactory
 import com.fasterxml.jackson.databind.node.ObjectNode
-import common.BitbucketConstants
+import io.github.clemenscode.bitbucketwatcher.client.BitbucketClient
+import io.github.clemenscode.bitbucketwatcher.client.TeamsClient
+import io.github.clemenscode.bitbucketwatcher.client.TeamsMessageBuilder
+import io.github.clemenscode.bitbucketwatcher.common.BitbucketConstants
+import io.github.clemenscode.bitbucketwatcher.model.Branch
 import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.verify
-import model.Branch
 import org.junit.jupiter.api.Test
 
 class BranchCheckSchedulerTest {

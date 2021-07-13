@@ -1,11 +1,11 @@
-package branches
+package io.github.clemenscode.bitbucketwatcher.branches
 
-import client.BitbucketClient
-import client.TeamsClient
-import client.TeamsMessageBuilder
-import common.BitbucketConstants
-import logger.getLogger
-import model.Branch
+import io.github.clemenscode.bitbucketwatcher.client.BitbucketClient
+import io.github.clemenscode.bitbucketwatcher.client.TeamsClient
+import io.github.clemenscode.bitbucketwatcher.client.TeamsMessageBuilder
+import io.github.clemenscode.bitbucketwatcher.common.BitbucketConstants
+import io.github.clemenscode.bitbucketwatcher.logger.getLogger
+import io.github.clemenscode.bitbucketwatcher.model.Branch
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
 import org.springframework.scheduling.annotation.Scheduled

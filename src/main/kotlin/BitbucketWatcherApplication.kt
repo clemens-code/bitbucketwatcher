@@ -1,11 +1,11 @@
-package bitbucketwatcher
+package io.github.clemenscode.bitbucketwatcher
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.scheduling.annotation.EnableScheduling
 
-@SpringBootApplication
 @EnableScheduling
+@SpringBootApplication
 class BitbucketWatcherApplication
 
 fun main(args: Array<String>) {

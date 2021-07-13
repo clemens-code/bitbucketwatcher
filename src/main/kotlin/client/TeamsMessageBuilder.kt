@@ -1,9 +1,9 @@
-package client
+package io.github.clemenscode.bitbucketwatcher.client
 
-import common.BitbucketConstants
-import model.Branch
-import model.PullRequest
-import model.TeamsMessage
+import io.github.clemenscode.bitbucketwatcher.common.BitbucketConstants
+import io.github.clemenscode.bitbucketwatcher.model.Branch
+import io.github.clemenscode.bitbucketwatcher.model.PullRequest
+import io.github.clemenscode.bitbucketwatcher.model.TeamsMessage
 import org.springframework.stereotype.Component
 
 private const val BRANCH_TEAMS_TEXT = "Branch has not been updated since at least a week!"

@@ -1,9 +1,9 @@
-package pullrequest.checker
+package io.github.clemenscode.bitbucketwatcher.pullrequest.checker
 
-import client.TeamsClient
-import client.TeamsMessageBuilder
-import model.PullRequest
-import model.ReviewerStatus
+import io.github.clemenscode.bitbucketwatcher.client.TeamsClient
+import io.github.clemenscode.bitbucketwatcher.client.TeamsMessageBuilder
+import io.github.clemenscode.bitbucketwatcher.model.PullRequest
+import io.github.clemenscode.bitbucketwatcher.model.ReviewerStatus
 import org.springframework.stereotype.Component
 
 private const val UNAPPROVED = "\"UNAPPROVED\""

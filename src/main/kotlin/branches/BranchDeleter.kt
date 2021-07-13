@@ -1,9 +1,9 @@
-package branches
+package io.github.clemenscode.bitbucketwatcher.branches
 
-import client.BitbucketClient
-import common.BitbucketConstants
-import logger.getLogger
-import model.BranchDeleteRequestModel
+import io.github.clemenscode.bitbucketwatcher.client.BitbucketClient
+import io.github.clemenscode.bitbucketwatcher.common.BitbucketConstants
+import io.github.clemenscode.bitbucketwatcher.logger.getLogger
+import io.github.clemenscode.bitbucketwatcher.model.BranchDeleteRequestModel
 import org.springframework.stereotype.Component
 
 @Component

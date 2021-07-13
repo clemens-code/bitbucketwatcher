@@ -1,15 +1,14 @@
-package de.otto.bitbucketwatcher.branches
+package io.github.clemenscode.bitbucketwatcher.branches
 
-import branches.BranchDeleter
-import client.BitbucketClient
 import com.fasterxml.jackson.databind.node.JsonNodeFactory
 import com.fasterxml.jackson.databind.node.ObjectNode
-import common.BitbucketConstants
+import io.github.clemenscode.bitbucketwatcher.client.BitbucketClient
+import io.github.clemenscode.bitbucketwatcher.common.BitbucketConstants
+import io.github.clemenscode.bitbucketwatcher.model.BranchDeleteRequestModel
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import model.BranchDeleteRequestModel
 import org.junit.jupiter.api.Test
 
 internal class BranchDeleterTest {

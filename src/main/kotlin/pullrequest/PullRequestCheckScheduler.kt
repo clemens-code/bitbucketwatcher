@@ -1,16 +1,16 @@
-package pullrequest
+package io.github.clemenscode.bitbucketwatcher.pullrequest
 
-import client.BitbucketClient
-import common.BitbucketConstants
-import logger.getLogger
-import model.PullRequest
+import io.github.clemenscode.bitbucketwatcher.client.BitbucketClient
+import io.github.clemenscode.bitbucketwatcher.common.BitbucketConstants
+import io.github.clemenscode.bitbucketwatcher.logger.getLogger
+import io.github.clemenscode.bitbucketwatcher.model.PullRequest
+import io.github.clemenscode.bitbucketwatcher.pullrequest.checker.ApprovalStatusChecker
+import io.github.clemenscode.bitbucketwatcher.pullrequest.checker.MergedPullRequestChecker
+import io.github.clemenscode.bitbucketwatcher.pullrequest.checker.NewPullRequestChecker
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
-import pullrequest.checker.ApprovalStatusChecker
-import pullrequest.checker.MergedPullRequestChecker
-import pullrequest.checker.NewPullRequestChecker
 
 @Component
 internal class PullRequestCheckScheduler(

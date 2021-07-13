@@ -1,15 +1,15 @@
-package de.otto.bitbucketwatcher.pullrequest
+package io.github.clemenscode.bitbucketwatcher.pullrequest
 
-import client.TeamsClient
-import client.TeamsMessageBuilder
+import io.github.clemenscode.bitbucketwatcher.client.TeamsClient
+import io.github.clemenscode.bitbucketwatcher.client.TeamsMessageBuilder
+import io.github.clemenscode.bitbucketwatcher.model.PullRequest
+import io.github.clemenscode.bitbucketwatcher.model.ReviewerStatus
+import io.github.clemenscode.bitbucketwatcher.pullrequest.checker.ApprovalStatusChecker
 import io.mockk.clearAllMocks
 import io.mockk.mockk
 import io.mockk.verify
-import model.PullRequest
-import model.ReviewerStatus
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import pullrequest.checker.ApprovalStatusChecker
 
 class ApprovalStatusCheckerTest {
 

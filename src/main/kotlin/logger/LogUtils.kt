@@ -1,4 +1,4 @@
-package logger
+package io.github.clemenscode.bitbucketwatcher.logger
 
 import org.slf4j.LoggerFactory
 

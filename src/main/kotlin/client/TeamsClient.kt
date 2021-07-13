@@ -1,8 +1,8 @@
-package client
+package io.github.clemenscode.bitbucketwatcher.client
 
 import feign.Headers
 import feign.RequestLine
-import model.TeamsMessage
+import io.github.clemenscode.bitbucketwatcher.model.TeamsMessage
 import org.springframework.stereotype.Component
 
 @Component

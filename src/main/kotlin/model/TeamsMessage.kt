@@ -1,4 +1,4 @@
-package model
+package io.github.clemenscode.bitbucketwatcher.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

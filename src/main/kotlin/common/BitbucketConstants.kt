@@ -1,4 +1,4 @@
-package common
+package io.github.clemenscode.bitbucketwatcher.common
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component

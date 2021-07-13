@@ -1,8 +1,8 @@
-package pullrequest.checker
+package io.github.clemenscode.bitbucketwatcher.pullrequest.checker
 
-import client.TeamsClient
-import client.TeamsMessageBuilder
-import model.PullRequest
+import io.github.clemenscode.bitbucketwatcher.client.TeamsClient
+import io.github.clemenscode.bitbucketwatcher.client.TeamsMessageBuilder
+import io.github.clemenscode.bitbucketwatcher.model.PullRequest
 import org.springframework.stereotype.Component
 
 @Component
