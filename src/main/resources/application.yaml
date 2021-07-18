@@ -13,8 +13,8 @@ bitbucket:
     connectTimeout: 60
     project-key: sp
     repo-slug: salesproduct
-    username: clschuet
-    password: z4mr3BF?#A
+    username: ${bitbucket_username}
+    password: ${bitbucket_password}
     pull-request:
         cron: 0 0/1 * ? * *
     branch:

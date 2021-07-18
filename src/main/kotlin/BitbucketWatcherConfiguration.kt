@@ -34,11 +34,6 @@ class BitbucketWatcherConfiguration(
         registerModule(JavaTimeModule())
     }
 
-    @Bean
-    fun basicAuthRequestInterceptor(): BasicAuthRequestInterceptor {
-        return BasicAuthRequestInterceptor(bitbucketUser, bitbucketPassword, Charsets.UTF_8)
-    }
-
     @ConditionalOnProperty("bitbucket.base-url")
     @Bean
     internal fun bitbucketClient(
@@ -49,6 +44,7 @@ class BitbucketWatcherConfiguration(
         Feign.builder().run {
             encoder(JacksonEncoder())
             decoder(JacksonDecoder())
+            requestInterceptor(BasicAuthRequestInterceptor(bitbucketUser, bitbucketPassword))
             options(Request.Options(connectTimeout, TimeUnit.MILLISECONDS, readTimeout, TimeUnit.MILLISECONDS, true))
             target(BitbucketClient::class.java, connectorUrl)
         }
