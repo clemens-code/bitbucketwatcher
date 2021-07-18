@@ -8,7 +8,7 @@ teams:
     connectTimeout: 60
 
 bitbucket:
-    base-url: https://bitbucket.scm.otto.de/
+    base-url: https://bitbucket.otto.de/
     readTimeout: 60
     connectTimeout: 60
     project-key: sp

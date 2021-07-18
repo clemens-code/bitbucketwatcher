@@ -36,7 +36,7 @@ class BitbucketWatcherConfiguration(
 
     @Bean
     fun basicAuthRequestInterceptor(): BasicAuthRequestInterceptor {
-        return BasicAuthRequestInterceptor(bitbucketUser, bitbucketPassword)
+        return BasicAuthRequestInterceptor(bitbucketUser, bitbucketPassword, Charsets.UTF_8)
     }
 
     @ConditionalOnProperty("bitbucket.base-url")
