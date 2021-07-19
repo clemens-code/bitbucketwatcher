@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component
 interface TeamsClient {
 
     @Headers("Content-Type: application/json; charset=utf-8")
-    @RequestLine("POST /")
+    @RequestLine("POST")
     fun postMessage(teamsMessage: TeamsMessage)
 }

@@ -44,7 +44,7 @@ class BitbucketWatcherConfiguration(
         Feign.builder().run {
             encoder(JacksonEncoder())
             decoder(JacksonDecoder())
-            requestInterceptor(BasicAuthRequestInterceptor(bitbucketUser, bitbucketPassword))
+            requestInterceptor(BasicAuthRequestInterceptor(bitbucketUser, bitbucketPassword, Charsets.UTF_8))
             options(Request.Options(connectTimeout, TimeUnit.MILLISECONDS, readTimeout, TimeUnit.MILLISECONDS, true))
             target(BitbucketClient::class.java, connectorUrl)
         }

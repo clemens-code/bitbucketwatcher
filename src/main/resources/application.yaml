@@ -3,14 +3,14 @@ spring:
         name: bitbucket-watcher
 
 teams:
-    url: https://og2gether.webhook.office.com/webhookb2/2307fa4a-e405-4e5b-a688-ceb95e5c095e@8794e153-c3bd-4479-8bea-61aeaf167d5a/IncomingWebhook/013ff38771e34faf94c8c540cb9e6bbb/3ec030f9-4c49-484d-b8a5-5cc8ff85634a
-    readTimeout: 60
-    connectTimeout: 60
+    url: https://og2gether.webhook.office.com/webhookb2/2307fa4a-e405-4e5b-a688-ceb95e5c095e@8794e153-c3bd-4479-8bea-61aeaf167d5a/IncomingWebhook/527ac99837d14b6394aa283463daa435/3ec030f9-4c49-484d-b8a5-5cc8ff85634a
+    readTimeout: 600
+    connectTimeout: 600
 
 bitbucket:
     base-url: https://bitbucket.otto.de/
-    readTimeout: 60
-    connectTimeout: 60
+    readTimeout: 600
+    connectTimeout: 600
     project-key: sp
     repo-slug: salesproduct
     username: ${bitbucket_username}

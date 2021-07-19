@@ -61,8 +61,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
 
     // Feign
-    implementation("io.github.openfeign:feign-core:10.9")
-    implementation("io.github.openfeign:feign-jackson:10.9")
+    implementation("io.github.openfeign:feign-core:11.1")
+    implementation("io.github.openfeign:feign-jackson:11.1")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
