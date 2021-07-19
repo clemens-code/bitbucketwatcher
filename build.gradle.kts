@@ -23,12 +23,14 @@ plugins {
 }
 
 group = "io.github.clemens-code.bitbucketwatcher"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.1"
 
 deploy {
     serviceName = "bitbucketwatcher"
     default {
-        dockerBuild()
+        dockerBuild {
+            version = project.version.toString()
+        }
         dockerPush {
             registryRoot = property("registryRoot").toString() ?: ""
             loginMethod = net.mayope.deployplugin.tasks.DockerLoginMethod.DOCKERHUB

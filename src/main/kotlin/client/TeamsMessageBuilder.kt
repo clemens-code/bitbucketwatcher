@@ -48,5 +48,5 @@ internal class TeamsMessageBuilder(
     private fun bitbucketLinkUrl() =
         bitbucketConstants.baseUrl + "projects/" +
             bitbucketConstants.projectKey + "/repos/" +
-            bitbucketConstants.repoSlug + "/"
+            bitbucketConstants.repoSlug + "/pull-requests"
 }
