@@ -7,13 +7,13 @@ spring:
 
 teams:
   url: ${teams-url}
-  readTimeout: 60
-  connectTimeout: 60
+  readTimeout: 600
+  connectTimeout: 600
 
 bitbucket:
   base-url: ${base-url}
-  readTimeout: 60
-  connectTimeout: 60
+  readTimeout: 600
+  connectTimeout: 600
   project-key: ${project-key}
   repo-slug: ${repo-slug}
   username: ${username}
