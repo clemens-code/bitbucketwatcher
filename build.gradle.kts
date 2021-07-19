@@ -16,7 +16,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "9.4.1"
 
     // deployment
-    id("net.mayope.deployplugin") version ("0.0.50")
+    id("net.mayope.deployplugin") version ("0.0.51")
 
     // docs
     id("io.github.danakuban.docs-gradle-plugin") version ("1.0.2")
@@ -29,16 +29,19 @@ deploy {
     serviceName = "bitbucketwatcher"
     default {
         dockerBuild()
-        dockerLogin {
-            registryRoot = property("registryRoot").toString()
-            loginMethod = net.mayope.deployplugin.tasks.DockerLoginMethod.AWS
-        }
         dockerPush {
-            registryRoot = property("registryRoot").toString()
-            loginMethod = net.mayope.deployplugin.tasks.DockerLoginMethod.AWS
+            registryRoot = property("registryRoot").toString() ?: ""
+            loginMethod = net.mayope.deployplugin.tasks.DockerLoginMethod.DOCKERHUB
+            loginUsername = property("dockerUser").toString() ?: ""
+            loginPassword = property("dockerPswd").toString() ?: ""
         }
         deploy {
             targetNamespaces = listOf(property("deployNameSpace").toString())
+        }
+        helmPush {
+            repositoryUrl = property("helmRepo").toString() ?: ""
+            repositoryUsername = property("helmUser").toString() ?: ""
+            repositoryPassword = property("helmPswd").toString() ?: ""
         }
     }
 }
@@ -58,8 +61,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
 
     // Feign
-    implementation("io.github.openfeign:feign-core:10.9")
-    implementation("io.github.openfeign:feign-jackson:10.9")
+    implementation("io.github.openfeign:feign-core:11.1")
+    implementation("io.github.openfeign:feign-jackson:11.1")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
