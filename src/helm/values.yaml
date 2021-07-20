@@ -22,6 +22,6 @@ service:
 ingress:
   enabled: true
 
-bitbucketSecret: ldap-fkt-user
+bitbucketSecret: bitbucket-user
 teamsCredentials: teams-credentials
 bitbucketCredentials: bitbucket-credentials
