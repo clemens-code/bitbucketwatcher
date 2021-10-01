@@ -7,10 +7,13 @@ import io.github.clemenscode.bitbucketwatcher.model.PullRequest
 import io.github.clemenscode.bitbucketwatcher.pullrequest.checker.ApprovalStatusChecker
 import io.github.clemenscode.bitbucketwatcher.pullrequest.checker.MergedPullRequestChecker
 import io.github.clemenscode.bitbucketwatcher.pullrequest.checker.NewPullRequestChecker
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
+
+private const val SCHEDULE_DELAY = 60000L
 
 @Component
 internal class PullRequestCheckScheduler(
@@ -19,7 +22,8 @@ internal class PullRequestCheckScheduler(
     private val approvalStatusChecker: ApprovalStatusChecker,
     private val newPullRequestChecker: NewPullRequestChecker,
     private val mergedPullRequestChecker: MergedPullRequestChecker,
-    private val bitbucketConstants: BitbucketConstants
+    private val bitbucketConstants: BitbucketConstants,
+    @Value("\${bitbucket.pull-request.cron}") private val scheduleTimer: Long
 ) {
 
     private val logger = getLogger(PullRequestCheckScheduler::class.java)
@@ -30,7 +34,7 @@ internal class PullRequestCheckScheduler(
         checkForPullRequestsToPublish()
     }
 
-    @Scheduled(cron = "\${bitbucket.pull-request.cron}")
+    @Scheduled(fixedDelay = SCHEDULE_DELAY)
     fun checkForPullRequestsToPublish() {
         logger.info("Start checking for new Pull Requests!")
         val openPRs = pullRequestBuilder.requestedPullRequests(requestNewestPRs())

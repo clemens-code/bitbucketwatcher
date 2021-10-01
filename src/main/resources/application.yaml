@@ -15,8 +15,6 @@ bitbucket:
     repo-slug: salesproduct
     username: ${bitbucket_username}
     password: ${bitbucket_password}
-    pull-request:
-        cron: 0 0/1 * ? * *
     branch:
         cron-check: 0 0/10 * ? * *
         cron-clear: 0 0 7 ? * *
