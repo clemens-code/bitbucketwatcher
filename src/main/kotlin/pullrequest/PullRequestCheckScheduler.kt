@@ -12,6 +12,8 @@ import org.springframework.context.event.EventListener
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 
+private const val SCHEDULE_DELAY = 60000L
+
 @Component
 internal class PullRequestCheckScheduler(
     private val bitbucketClient: BitbucketClient,
@@ -30,7 +32,7 @@ internal class PullRequestCheckScheduler(
         checkForPullRequestsToPublish()
     }
 
-    @Scheduled(cron = "\${bitbucket.pull-request.cron}")
+    @Scheduled(fixedDelay = SCHEDULE_DELAY)
     fun checkForPullRequestsToPublish() {
         logger.info("Start checking for new Pull Requests!")
         val openPRs = pullRequestBuilder.requestedPullRequests(requestNewestPRs())
