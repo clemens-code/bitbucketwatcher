@@ -30,7 +30,7 @@ internal class PullRequestCheckScheduler(
         checkForPullRequestsToPublish()
     }
 
-    @Scheduled(cron = "\${pull-request.cron}")
+    @Scheduled(cron = "\${bitbucket.pull-request.cron}")
     fun checkForPullRequestsToPublish() {
         logger.info("Start checking for new Pull Requests!")
         val openPRs = pullRequestBuilder.requestedPullRequests(requestNewestPRs())
