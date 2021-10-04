@@ -18,6 +18,8 @@ bitbucket:
   repo-slug: ${repo-slug}
   username: ${username}
   password: ${password}
+  pull-request:
+    cron: 0 * * ? * *
   branch:
     cron-check: 0 0/10 * ? * *
     cron-clear: 0 0 7 ? * *
