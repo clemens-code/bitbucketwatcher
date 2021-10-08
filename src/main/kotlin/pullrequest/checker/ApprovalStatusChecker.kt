@@ -24,7 +24,6 @@ internal class ApprovalStatusChecker(
      * in the end; overwrites the known ApprovalStatus
      */
     fun publishNewApprovalStatus(pullRequest: PullRequest) {
-        logger.info("PullRequests: $pullRequest")
         pullRequest.statusByReviewers
             .filter { it.status != UNAPPROVED }
             .filter { !isAlreadyPublishedReviewStatus(pullRequest.id, it) }

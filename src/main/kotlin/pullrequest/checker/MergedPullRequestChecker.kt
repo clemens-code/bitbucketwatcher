@@ -19,7 +19,6 @@ internal class MergedPullRequestChecker(
         publishedPRs: MutableMap<String, PullRequest>,
         mergedPullRequests: List<PullRequest>
     ): MutableMap<String, PullRequest> {
-        logger.info("Merged PullRequests: $mergedPullRequests")
         mergedPullRequests
             .forEach {
                 if (publishedPRs[it.id] != null) {

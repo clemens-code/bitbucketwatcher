@@ -47,6 +47,7 @@ internal class PullRequestCheckScheduler(
         openPRs
             .filter { !isAlreadyPublished(it) }
             .forEach {
+                logger.info("Sending new PR to Teams ${it.title}")
                 newPullRequestChecker.publishNewPullRequests(it)
                 alreadyPublishedPRs[it.id] = it
             }
