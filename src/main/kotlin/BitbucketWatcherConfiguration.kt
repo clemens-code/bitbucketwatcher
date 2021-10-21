@@ -45,7 +45,7 @@ class BitbucketWatcherConfiguration(
             encoder(JacksonEncoder())
             decoder(JacksonDecoder())
             requestInterceptor(BasicAuthRequestInterceptor(bitbucketUser, bitbucketPassword, Charsets.UTF_8))
-            options(Request.Options(connectTimeout, TimeUnit.MILLISECONDS, readTimeout, TimeUnit.MILLISECONDS, true))
+            options(Request.Options(connectTimeout, TimeUnit.SECONDS, readTimeout, TimeUnit.SECONDS, true))
             target(BitbucketClient::class.java, connectorUrl)
         }
 
@@ -60,7 +60,7 @@ class BitbucketWatcherConfiguration(
             encoder(JacksonEncoder(objectMapper))
             decoder(JacksonDecoder(objectMapper))
             decode404()
-            options(Request.Options(connectTimeout, TimeUnit.MILLISECONDS, readTimeout, TimeUnit.MILLISECONDS, true))
+            options(Request.Options(connectTimeout, TimeUnit.SECONDS, readTimeout, TimeUnit.SECONDS, true))
             target(TeamsClient::class.java, connectorUrl)
         }
 }

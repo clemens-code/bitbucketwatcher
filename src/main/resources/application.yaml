@@ -5,16 +5,16 @@ spring:
 teams:
     url: https://og2gether.webhook.office.com/webhookb2/2307fa4a-e405-4e5b-a688-ceb95e5c095e@8794e153-c3bd-4479-8bea-61aeaf167d5a/IncomingWebhook/527ac99837d14b6394aa283463daa435/3ec030f9-4c49-484d-b8a5-5cc8ff85634a
     readTimeout: 600
-    connectTimeout: 600
+    connectTimeout: 6
 
 bitbucket:
     base-url: https://bitbucket.otto.de/
     readTimeout: 600
-    connectTimeout: 600
-    project-key: sp
-    repo-slug: salesproduct
-    username: ${bitbucket_username}
-    password: ${bitbucket_password}
+    connectTimeout: 6
+    project-key: ${project-key}
+    repo-slug: ${repo-slug}
+    username: ${username}
+    password: ${password}
     pull-request:
         cron: 0 * * ? * *
     branch:

@@ -8,7 +8,7 @@ spring:
 teams:
   url: ${teams-url}
   readTimeout: 600
-  connectTimeout: 600
+  connectTimeout: 6
 
 bitbucket:
   base-url: ${base-url}
