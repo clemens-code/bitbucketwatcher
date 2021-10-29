@@ -2,7 +2,8 @@ package de.otto.bitbucketwatcher.pullrequest
 
 import io.github.clemenscode.bitbucketwatcher.branches.BranchDeleter
 import io.github.clemenscode.bitbucketwatcher.client.TeamsClient
-import io.github.clemenscode.bitbucketwatcher.client.TeamsMessageBuilder
+import io.github.clemenscode.bitbucketwatcher.client.builder.TeamsMessageBuilder
+import io.github.clemenscode.bitbucketwatcher.client.builder.TelegramMessageBuilder
 import io.github.clemenscode.bitbucketwatcher.model.PullRequest
 import io.github.clemenscode.bitbucketwatcher.model.ReviewerStatus
 import io.github.clemenscode.bitbucketwatcher.pullrequest.checker.MergedPullRequestChecker
@@ -17,8 +18,10 @@ class MergedPullRequestCheckerTest {
     private val client = mockk<TeamsClient>(relaxed = true)
     private val messageBuilder = mockk<TeamsMessageBuilder>(relaxed = true)
     private val deleter = mockk<BranchDeleter>(relaxed = true)
+    private val telegramMessageBuilder = mockk<TelegramMessageBuilder>(relaxed = true)
 
-    private val mergedPullRequestChecker = MergedPullRequestChecker(client, messageBuilder, deleter)
+    private val mergedPullRequestChecker =
+        MergedPullRequestChecker(client, messageBuilder, deleter, telegramMessageBuilder)
 
     @BeforeEach
     fun setup() {

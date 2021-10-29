@@ -5,11 +5,13 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import feign.Feign
 import feign.Request
+import feign.Retryer
 import feign.auth.BasicAuthRequestInterceptor
 import feign.jackson.JacksonDecoder
 import feign.jackson.JacksonEncoder
 import io.github.clemenscode.bitbucketwatcher.client.BitbucketClient
 import io.github.clemenscode.bitbucketwatcher.client.TeamsClient
+import io.github.clemenscode.bitbucketwatcher.client.TelegramClient
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
@@ -60,7 +62,25 @@ class BitbucketWatcherConfiguration(
             encoder(JacksonEncoder(objectMapper))
             decoder(JacksonDecoder(objectMapper))
             decode404()
+            retryer(Retryer.NEVER_RETRY)
             options(Request.Options(connectTimeout, TimeUnit.SECONDS, readTimeout, TimeUnit.SECONDS, true))
             target(TeamsClient::class.java, connectorUrl)
+        }
+
+    @ConditionalOnProperty("telegram.token")
+    @Bean
+    internal fun telegramClient(
+        @Value("\${telegram.url}") connectorUrl: String,
+        @Value("\${telegram.readTimeout}") readTimeout: Long,
+        @Value("\${telegram.connectTimeout}") connectTimeout: Long,
+        @Value("\${telegram.token}") token: String,
+    ): TelegramClient =
+        Feign.builder().run {
+            encoder(JacksonEncoder(objectMapper))
+            decoder(JacksonDecoder(objectMapper))
+            decode404()
+            retryer(Retryer.NEVER_RETRY)
+            options(Request.Options(connectTimeout, TimeUnit.SECONDS, readTimeout, TimeUnit.SECONDS, true))
+            target(TelegramClient::class.java, "$connectorUrl$token")
         }
 }

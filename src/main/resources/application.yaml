@@ -3,7 +3,15 @@ spring:
         name: bitbucket-watcher
 
 teams:
-    url: https://og2gether.webhook.office.com/webhookb2/2307fa4a-e405-4e5b-a688-ceb95e5c095e@8794e153-c3bd-4479-8bea-61aeaf167d5a/IncomingWebhook/527ac99837d14b6394aa283463daa435/3ec030f9-4c49-484d-b8a5-5cc8ff85634a
+    url: ${teams-url}
+    readTimeout: 600
+    connectTimeout: 6
+
+telegram:
+    url: https://api.telegram.org/bot
+    bot: ${bot-name}
+    token: ${token}
+    chat-id: ${chat-id}
     readTimeout: 600
     connectTimeout: 6
 

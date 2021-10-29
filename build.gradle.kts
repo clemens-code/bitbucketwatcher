@@ -28,7 +28,7 @@ deploy {
     serviceName = "bitbucketwatcher"
     default {
         dockerBuild {
-            version = "0.0.4"
+            version = "0.0.7"
         }
         dockerPush {
             registryRoot = property("registryRoot").toString() ?: ""

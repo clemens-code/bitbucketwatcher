@@ -7,8 +7,6 @@ import io.github.clemenscode.bitbucketwatcher.model.PullRequest
 import io.github.clemenscode.bitbucketwatcher.pullrequest.checker.ApprovalStatusChecker
 import io.github.clemenscode.bitbucketwatcher.pullrequest.checker.MergedPullRequestChecker
 import io.github.clemenscode.bitbucketwatcher.pullrequest.checker.NewPullRequestChecker
-import org.springframework.boot.context.event.ApplicationReadyEvent
-import org.springframework.context.event.EventListener
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 
@@ -27,11 +25,6 @@ internal class PullRequestCheckScheduler(
     private val logger = getLogger(PullRequestCheckScheduler::class.java)
     private var alreadyPublishedPRs = mutableMapOf<String, PullRequest>()
 
-    @EventListener(value = [ApplicationReadyEvent::class])
-    fun onStartup() {
-        checkForPullRequestsToPublish()
-    }
-
     @Scheduled(fixedDelay = SCHEDULE_DELAY)
     fun checkForPullRequestsToPublish() {
         logger.info("Start checking for new Pull Requests!")
@@ -47,8 +40,8 @@ internal class PullRequestCheckScheduler(
         openPRs
             .filter { !isAlreadyPublished(it) }
             .forEach {
-                logger.info("Sending new PR to Teams ${it.title}")
                 newPullRequestChecker.publishNewPullRequests(it)
+                logger.info("Send new PR to Teams ${it.title}")
                 alreadyPublishedPRs[it.id] = it
             }
     }

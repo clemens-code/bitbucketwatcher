@@ -1,7 +1,8 @@
 package io.github.clemenscode.bitbucketwatcher.pullrequest.checker
 
 import io.github.clemenscode.bitbucketwatcher.client.TeamsClient
-import io.github.clemenscode.bitbucketwatcher.client.TeamsMessageBuilder
+import io.github.clemenscode.bitbucketwatcher.client.builder.TeamsMessageBuilder
+import io.github.clemenscode.bitbucketwatcher.client.builder.TelegramMessageBuilder
 import io.github.clemenscode.bitbucketwatcher.logger.getLogger
 import io.github.clemenscode.bitbucketwatcher.model.PullRequest
 import io.github.clemenscode.bitbucketwatcher.model.ReviewerStatus
@@ -12,7 +13,8 @@ private const val UNAPPROVED = "\"UNAPPROVED\""
 @Component
 internal class ApprovalStatusChecker(
     private val teamsClient: TeamsClient,
-    private val teamsMessageBuilder: TeamsMessageBuilder
+    private val teamsMessageBuilder: TeamsMessageBuilder,
+    private val telegramMessageBuilder: TelegramMessageBuilder
 ) {
 
     private val logger = getLogger(ApprovalStatusChecker::class.java)
@@ -28,8 +30,12 @@ internal class ApprovalStatusChecker(
             .filter { it.status != UNAPPROVED }
             .filter { !isAlreadyPublishedReviewStatus(pullRequest.id, it) }
             .forEach {
-                logger.info("Sending new Approval status for ${pullRequest.title}")
                 teamsClient.postMessage(teamsMessageBuilder.statusChangeMessage(pullRequest, it.reviewer, it.status))
+                telegramMessageBuilder.buildTelegramMessage(
+                    "New Approval Status ${pullRequest.title} from ${pullRequest.authorName}, " +
+                        "${it.reviewer} changed to ${it.status}"
+                )
+                logger.info("Send new Approval status for ${pullRequest.title}")
             }
         writeApprovalStatus(pullRequest)
     }

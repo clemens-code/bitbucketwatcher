@@ -10,10 +10,18 @@ teams:
   readTimeout: 600
   connectTimeout: 6
 
+telegram:
+  url: https://api.telegram.org/bot
+  bot: ${bot-name}
+  token: ${token}
+  chat-id: ${chat-id}
+  readTimeout: 600
+  connectTimeout: 6
+
 bitbucket:
   base-url: ${base-url}
   readTimeout: 600
-  connectTimeout: 600
+  connectTimeout: 6
   project-key: ${project-key}
   repo-slug: ${repo-slug}
   username: ${username}
