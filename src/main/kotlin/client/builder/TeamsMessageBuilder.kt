@@ -1,4 +1,4 @@
-package io.github.clemenscode.bitbucketwatcher.client
+package io.github.clemenscode.bitbucketwatcher.client.builder
 
 import io.github.clemenscode.bitbucketwatcher.common.BitbucketConstants
 import io.github.clemenscode.bitbucketwatcher.model.Branch

@@ -8,18 +8,26 @@ spring:
 teams:
   url: ${teams-url}
   readTimeout: 600
-  connectTimeout: 600
+  connectTimeout: 6
+
+telegram:
+  url: https://api.telegram.org/bot
+  bot: ${bot-name}
+  token: ${token}
+  chat-id: ${chat-id}
+  readTimeout: 600
+  connectTimeout: 6
 
 bitbucket:
   base-url: ${base-url}
   readTimeout: 600
-  connectTimeout: 600
+  connectTimeout: 6
   project-key: ${project-key}
   repo-slug: ${repo-slug}
   username: ${username}
   password: ${password}
   pull-request:
-    cron: 0 0/1 * ? * *
+    cron: 0 * * ? * *
   branch:
     cron-check: 0 0/10 * ? * *
     cron-clear: 0 0 7 ? * *

@@ -1,7 +1,8 @@
 package io.github.clemenscode.bitbucketwatcher.pullrequest
 
 import io.github.clemenscode.bitbucketwatcher.client.TeamsClient
-import io.github.clemenscode.bitbucketwatcher.client.TeamsMessageBuilder
+import io.github.clemenscode.bitbucketwatcher.client.builder.TeamsMessageBuilder
+import io.github.clemenscode.bitbucketwatcher.client.builder.TelegramMessageBuilder
 import io.github.clemenscode.bitbucketwatcher.model.PullRequest
 import io.github.clemenscode.bitbucketwatcher.model.ReviewerStatus
 import io.github.clemenscode.bitbucketwatcher.pullrequest.checker.ApprovalStatusChecker
@@ -15,8 +16,9 @@ class ApprovalStatusCheckerTest {
 
     private val client = mockk<TeamsClient>(relaxed = true)
     private val messageBuilder = mockk<TeamsMessageBuilder>(relaxed = true)
+    private val telegramMessageBuilder = mockk<TelegramMessageBuilder>(relaxed = true)
 
-    private val approvalStatusChecker = ApprovalStatusChecker(client, messageBuilder)
+    private val approvalStatusChecker = ApprovalStatusChecker(client, messageBuilder, telegramMessageBuilder)
 
     @BeforeEach
     fun setup() {
