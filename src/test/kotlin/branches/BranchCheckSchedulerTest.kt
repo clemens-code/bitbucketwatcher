@@ -4,9 +4,10 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory
 import com.fasterxml.jackson.databind.node.ObjectNode
 import io.github.clemenscode.bitbucketwatcher.client.BitbucketClient
 import io.github.clemenscode.bitbucketwatcher.client.TeamsClient
-import io.github.clemenscode.bitbucketwatcher.client.builder.TeamsMessageBuilder
+import io.github.clemenscode.bitbucketwatcher.client.builder.PullRequestMessages
 import io.github.clemenscode.bitbucketwatcher.common.BitbucketConstants
 import io.github.clemenscode.bitbucketwatcher.model.Branch
+import io.github.clemenscode.bitbucketwatcher.notificator.PullRequestNotificator
 import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.verify
@@ -18,18 +19,19 @@ class BranchCheckSchedulerTest {
     private val bitbucketClient = mockk<BitbucketClient>()
     private val teamsClient = mockk<TeamsClient>()
     private val deleter = mockk<BranchDeleter>()
-    private val teamsMessageBuilder = mockk<TeamsMessageBuilder>(relaxed = true)
+    private val pullRequestMessages = mockk<PullRequestMessages>(relaxed = true)
     private val constants = mockk<BitbucketConstants>(relaxed = true)
+    private val notificator = mockk<PullRequestNotificator>(relaxed = true)
 
     private val branchCheckScheduler =
-        BranchCheckScheduler(
-            branchBuilder,
-            bitbucketClient,
-            teamsClient,
-            deleter,
-            teamsMessageBuilder,
-            constants
-        )
+            BranchCheckScheduler(
+                    branchBuilder,
+                    bitbucketClient,
+                    deleter,
+                    pullRequestMessages,
+                    constants,
+                    notificator
+            )
 
     @Test
     fun checkForFinishedBranchesTest() {
@@ -45,12 +47,12 @@ class BranchCheckSchedulerTest {
     fun checkNoOldBrancheTest() {
         coEvery { bitbucketClient.getAllBranches(any(), any()) }.returns(ObjectNode(JsonNodeFactory(true)))
         coEvery { branchBuilder.buildBranches(any()) }.returns(
-            listOf(
-                Branch(
-                    "123",
-                    System.currentTimeMillis()
+                listOf(
+                        Branch(
+                                "123",
+                                System.currentTimeMillis()
+                        )
                 )
-            )
         )
         coEvery { teamsClient.postMessage(any()) }.returns(Unit)
         branchCheckScheduler.checkForFinishedBranches()
@@ -72,13 +74,13 @@ class BranchCheckSchedulerTest {
     fun openPrForBranchTest() {
         coEvery { bitbucketClient.getAllBranches(any(), any()) }.returns(ObjectNode(JsonNodeFactory(true)))
         coEvery { branchBuilder.buildBranches(any()) }.returns(
-            listOf(
-                Branch(
-                    "\"refs/heads/feature/test\"",
-                    System.currentTimeMillis(),
-                    "\"OPEN\""
+                listOf(
+                        Branch(
+                                "\"refs/heads/feature/test\"",
+                                System.currentTimeMillis(),
+                                "\"OPEN\""
+                        )
                 )
-            )
         )
         coEvery { teamsClient.postMessage(any()) }
         branchCheckScheduler.checkForFinishedBranches()
@@ -91,13 +93,13 @@ class BranchCheckSchedulerTest {
         val id = "\"refs/heads/feature/test\""
         coEvery { bitbucketClient.getAllBranches(any(), any()) }.returns(ObjectNode(JsonNodeFactory(true)))
         coEvery { branchBuilder.buildBranches(any()) }.returns(
-            listOf(
-                Branch(
-                    id,
-                    System.currentTimeMillis(),
-                    "\"MERGED\""
+                listOf(
+                        Branch(
+                                id,
+                                System.currentTimeMillis(),
+                                "\"MERGED\""
+                        )
                 )
-            )
         )
         coEvery { teamsClient.postMessage(any()) }
         coEvery { deleter.deleteBranch(any()) }.returns(Unit)
