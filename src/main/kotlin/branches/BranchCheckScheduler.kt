@@ -1,7 +1,6 @@
 package io.github.clemenscode.bitbucketwatcher.branches
 
 import io.github.clemenscode.bitbucketwatcher.client.BitbucketClient
-import io.github.clemenscode.bitbucketwatcher.client.TeamsClient
 import io.github.clemenscode.bitbucketwatcher.client.builder.PullRequestMessages
 import io.github.clemenscode.bitbucketwatcher.common.BitbucketConstants
 import io.github.clemenscode.bitbucketwatcher.logger.getLogger
