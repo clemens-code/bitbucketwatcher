@@ -11,7 +11,7 @@ teams:
   connectTimeout: 6
 
 telegram:
-  url: https://api.telegram.org/bot
+  url: ${telegram-url}
   bot: ${bot-name}
   token: ${token}
   chat-id: ${chat-id}

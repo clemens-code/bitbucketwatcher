@@ -27,7 +27,7 @@ internal class MergedPullRequestChecker(
                         try {
                             deleter.deleteBranch(it.branchId)
                         } catch (e: FeignException) {
-                            error("Could not delete Branch of merged PR ${it.title}")
+                            logger.warn("Could not delete Branch of merged PR ${it.title}", e)
                         }
                         notificator.publish(pullRequestMessages.mergedPRMessage(it))
                         publishedPRs.remove(it.id)

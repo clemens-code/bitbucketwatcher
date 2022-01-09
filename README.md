@@ -11,7 +11,10 @@ The Watcher tracks new PullRequests, status changes on code reviews, merged bran
 
 ## Supported Technology
 
-At the time only Bitbucket with the API 1.0 and Teams are supported. 
+As Repository is only Bitbucket is supported. 
+As message channels Teams and Telegram are supported. 
+Teams via the webhook API and Telegram via the Bot API. 
+You can either use both of them or only one. 
 
 ## How to Start 
 
@@ -21,7 +24,7 @@ The Helm Charts can be checkout from [here](https://charts.mayope.net)
 
 ### Environment Variables 
 
-For the communikation with Bitbucket and Teams some variables are needed. 
+For the communication with Bitbucket and Teams some variables are needed. 
 In Kubernetes the easiest way to provide them is with a config-map. 
 
 #### Example for Config
@@ -50,6 +53,22 @@ metadata:
   namespace: default
 data:
   teams-url: https://og2gether.webhook.office.com/webhookb2/your-really-long-webhook
+  
+```
+  
+*Telegram Config*
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: telegram-credentials
+  namespace: default
+data:
+  telegram-url: telegram
+  bot: name of your bot
+  token: bot auth token
+  chat-id: id of the wanted chat 
 ```
 
 To apply them use `kubectl apply -f .\dataName.yaml`
