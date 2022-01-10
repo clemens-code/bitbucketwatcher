@@ -19,12 +19,12 @@ private const val MERGED = "\"MERGED\""
 
 @Component
 internal class BranchCheckScheduler(
-        private val branchBuilder: BranchBuilder,
-        private val bitbucketClient: BitbucketClient,
-        private val deleter: BranchDeleter,
-        private val pullRequestMessages: PullRequestMessages,
-        private val bitbucketConstants: BitbucketConstants,
-        private val notificator: PullRequestNotificator
+    private val branchBuilder: BranchBuilder,
+    private val bitbucketClient: BitbucketClient,
+    private val deleter: BranchDeleter,
+    private val pullRequestMessages: PullRequestMessages,
+    private val bitbucketConstants: BitbucketConstants,
+    private val notificator: PullRequestNotificator
 ) {
     private val logger = getLogger(BranchCheckScheduler::class.java)
 

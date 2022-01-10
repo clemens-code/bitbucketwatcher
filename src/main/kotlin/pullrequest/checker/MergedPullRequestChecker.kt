@@ -10,29 +10,29 @@ import org.springframework.stereotype.Component
 
 @Component
 internal class MergedPullRequestChecker(
-        private val pullRequestMessages: PullRequestMessages,
-        private val deleter: BranchDeleter,
-        private val notificator: PullRequestNotificator
+    private val pullRequestMessages: PullRequestMessages,
+    private val deleter: BranchDeleter,
+    private val notificator: PullRequestNotificator
 ) {
     private val logger = getLogger(MergedPullRequestChecker::class.java)
 
     fun publishMergedPullRequests(
-            publishedPRs: MutableMap<String, PullRequest>,
-            mergedPullRequests: List<PullRequest>
+        publishedPRs: MutableMap<String, PullRequest>,
+        mergedPullRequests: List<PullRequest>
     ): MutableMap<String, PullRequest> {
         mergedPullRequests
-                .forEach {
-                    if (publishedPRs[it.id] != null) {
-                        logger.info("Merged ${it.title} sending it to teams")
-                        try {
-                            deleter.deleteBranch(it.branchId)
-                        } catch (e: FeignException) {
-                            logger.warn("Could not delete Branch of merged PR ${it.title}", e)
-                        }
-                        notificator.publish(pullRequestMessages.mergedPRMessage(it))
-                        publishedPRs.remove(it.id)
+            .forEach {
+                if (publishedPRs[it.id] != null) {
+                    logger.info("Merged ${it.title} sending it to teams")
+                    try {
+                        deleter.deleteBranch(it.branchId)
+                    } catch (e: FeignException) {
+                        logger.warn("Could not delete Branch of merged PR ${it.title}", e)
                     }
+                    notificator.publish(pullRequestMessages.mergedPRMessage(it))
+                    publishedPRs.remove(it.id)
                 }
+            }
         return publishedPRs
     }
 }

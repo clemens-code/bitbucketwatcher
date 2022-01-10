@@ -11,8 +11,8 @@ private const val UNAPPROVED = "\"UNAPPROVED\""
 
 @Component
 internal class ApprovalStatusChecker(
-        private val pullRequestMessages: PullRequestMessages,
-        private val notificator: PullRequestNotificator
+    private val pullRequestMessages: PullRequestMessages,
+    private val notificator: PullRequestNotificator
 ) {
 
     private val logger = getLogger(ApprovalStatusChecker::class.java)
@@ -25,17 +25,17 @@ internal class ApprovalStatusChecker(
      */
     fun publishNewApprovalStatus(pullRequest: PullRequest) {
         pullRequest.statusByReviewers
-                .filter { it.status != UNAPPROVED }
-                .filter { !isAlreadyPublishedReviewStatus(pullRequest.id, it) }
-                .forEach {
-                    notificator.publish(pullRequestMessages.statusChangeMessage(pullRequest, it.reviewer, it.status))
-                    logger.info("Send new Approval status for ${pullRequest.title}")
-                }
+            .filter { it.status != UNAPPROVED }
+            .filter { !isAlreadyPublishedReviewStatus(pullRequest.id, it) }
+            .forEach {
+                notificator.publish(pullRequestMessages.statusChangeMessage(pullRequest, it.reviewer, it.status))
+                logger.info("Send new Approval status for ${pullRequest.title}")
+            }
         writeApprovalStatus(pullRequest)
     }
 
     private fun isAlreadyPublishedReviewStatus(pullRequestId: String, reviewStatus: ReviewerStatus) =
-            latestApprovalStatus[pullRequestId + reviewStatus.reviewer] == reviewStatus.status
+        latestApprovalStatus[pullRequestId + reviewStatus.reviewer] == reviewStatus.status
 
     private fun writeApprovalStatus(pullRequest: PullRequest) {
         pullRequest.statusByReviewers.forEach { reviewerStatus ->

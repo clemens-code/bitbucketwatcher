@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component
 
 @Component
 internal class NewPullRequestChecker(
-        private val pullRequestMessages: PullRequestMessages,
-        private val notificator: PullRequestNotificator
+    private val pullRequestMessages: PullRequestMessages,
+    private val notificator: PullRequestNotificator
 ) {
 
     private val logger = getLogger(NewPullRequestChecker::class.java)

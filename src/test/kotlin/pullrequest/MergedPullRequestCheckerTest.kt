@@ -19,7 +19,7 @@ class MergedPullRequestCheckerTest {
     private val notificator = mockk<PullRequestNotificator>(relaxed = true)
 
     private val mergedPullRequestChecker =
-            MergedPullRequestChecker(messageBuilder, deleter, notificator)
+        MergedPullRequestChecker(messageBuilder, deleter, notificator)
 
     @BeforeEach
     fun setup() {
@@ -31,10 +31,10 @@ class MergedPullRequestCheckerTest {
         val updateTime = 1213456L
         val reviewer = ReviewerStatus("\"testReviewer\"", "\"APPROVED\"")
         val pullRequest =
-                PullRequest("\"123\"", "\"test-PR\"", "branchId", "\"testAuthor\"", updateTime, listOf(reviewer))
+            PullRequest("\"123\"", "\"test-PR\"", "branchId", "\"testAuthor\"", updateTime, listOf(reviewer))
         mergedPullRequestChecker.publishMergedPullRequests(
-                mutableMapOf(Pair(pullRequest.id, pullRequest)),
-                getMergedPullRequests()
+            mutableMapOf(Pair(pullRequest.id, pullRequest)),
+            getMergedPullRequests()
         )
         verify(atLeast = 1, atMost = 1) { deleter.deleteBranch(any()) }
         verify(atLeast = 1, atMost = 1) { notificator.publish(any()) }
@@ -45,10 +45,10 @@ class MergedPullRequestCheckerTest {
         val updateTime = 1213456L
         val reviewer = ReviewerStatus("\"testReviewer\"", "\"APPROVED\"")
         val pullRequest =
-                PullRequest("\"321\"", "\"test-PR\"", "branchId", "\"testAuthor\"", updateTime, listOf(reviewer))
+            PullRequest("\"321\"", "\"test-PR\"", "branchId", "\"testAuthor\"", updateTime, listOf(reviewer))
         mergedPullRequestChecker.publishMergedPullRequests(
-                mutableMapOf(Pair(pullRequest.id, pullRequest)),
-                getMergedPullRequests()
+            mutableMapOf(Pair(pullRequest.id, pullRequest)),
+            getMergedPullRequests()
         )
         verify(atLeast = 0, atMost = 0) { deleter.deleteBranch(any()) }
         verify(atLeast = 0, atMost = 0) { notificator.publish(any()) }
@@ -58,9 +58,9 @@ class MergedPullRequestCheckerTest {
         val updateTime = 1213456L
         val reviewer = ReviewerStatus("\"testReviewer\"", "\"APPROVED\"")
         val pullRequest1 =
-                PullRequest("\"123\"", "\"test-PR\"", "branchId", "\"testAuthor\"", updateTime, listOf(reviewer))
+            PullRequest("\"123\"", "\"test-PR\"", "branchId", "\"testAuthor\"", updateTime, listOf(reviewer))
         val pullRequest2 =
-                PullRequest("\"124\"", "\"test-PR\"", "branchId", "\"testAuthor\"", updateTime, listOf(reviewer))
+            PullRequest("\"124\"", "\"test-PR\"", "branchId", "\"testAuthor\"", updateTime, listOf(reviewer))
         return listOf(pullRequest1, pullRequest2)
     }
 }
