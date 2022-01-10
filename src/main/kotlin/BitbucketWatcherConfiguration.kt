@@ -62,6 +62,7 @@ class BitbucketWatcherConfiguration(
             encoder(JacksonEncoder(objectMapper))
             decoder(JacksonDecoder(objectMapper))
             decode404()
+            retryer(Retryer.NEVER_RETRY)
             options(Request.Options(connectTimeout, TimeUnit.SECONDS, readTimeout, TimeUnit.SECONDS, true))
             target(TeamsClient::class.java, connectorUrl)
         }
