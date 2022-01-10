@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component
 @ConditionalOnBean(TelegramClient::class)
 @Component
 internal class TelegramNotificator(
-private val telegramClient: TelegramClient,
-@Value("\${telegram.chat-id}") private val chatId: String
+    private val telegramClient: TelegramClient,
+    @Value("\${telegram.chat-id}") private val chatId: String
 ) : Notificator {
 
     override fun publishMessage(message: PullRequestMessage) {

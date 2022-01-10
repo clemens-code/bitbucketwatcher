@@ -22,14 +22,14 @@ class BranchCheckSchedulerTest {
     private val notificator = mockk<PullRequestNotificator>(relaxed = true)
 
     private val branchCheckScheduler =
-            BranchCheckScheduler(
-                    branchBuilder,
-                    bitbucketClient,
-                    deleter,
-                    pullRequestMessages,
-                    constants,
-                    notificator
-            )
+        BranchCheckScheduler(
+            branchBuilder,
+            bitbucketClient,
+            deleter,
+            pullRequestMessages,
+            constants,
+            notificator
+        )
 
     @Test
     fun checkForFinishedBranchesTest() {
@@ -44,12 +44,12 @@ class BranchCheckSchedulerTest {
     fun checkNoOldBrancheTest() {
         coEvery { bitbucketClient.getAllBranches(any(), any()) }.returns(ObjectNode(JsonNodeFactory(true)))
         coEvery { branchBuilder.buildBranches(any()) }.returns(
-                listOf(
-                        Branch(
-                                "123",
-                                System.currentTimeMillis()
-                        )
+            listOf(
+                Branch(
+                    "123",
+                    System.currentTimeMillis()
                 )
+            )
         )
         branchCheckScheduler.checkForFinishedBranches()
         verify(atLeast = 0, atMost = 0) { deleter.deleteBranch(any()) }
@@ -69,13 +69,13 @@ class BranchCheckSchedulerTest {
     fun openPrForBranchTest() {
         coEvery { bitbucketClient.getAllBranches(any(), any()) }.returns(ObjectNode(JsonNodeFactory(true)))
         coEvery { branchBuilder.buildBranches(any()) }.returns(
-                listOf(
-                        Branch(
-                                "\"refs/heads/feature/test\"",
-                                System.currentTimeMillis(),
-                                "\"OPEN\""
-                        )
+            listOf(
+                Branch(
+                    "\"refs/heads/feature/test\"",
+                    System.currentTimeMillis(),
+                    "\"OPEN\""
                 )
+            )
         )
         branchCheckScheduler.checkForFinishedBranches()
         verify(atLeast = 0, atMost = 0) { deleter.deleteBranch(any()) }
@@ -87,13 +87,13 @@ class BranchCheckSchedulerTest {
         val id = "\"refs/heads/feature/test\""
         coEvery { bitbucketClient.getAllBranches(any(), any()) }.returns(ObjectNode(JsonNodeFactory(true)))
         coEvery { branchBuilder.buildBranches(any()) }.returns(
-                listOf(
-                        Branch(
-                                id,
-                                System.currentTimeMillis(),
-                                "\"MERGED\""
-                        )
+            listOf(
+                Branch(
+                    id,
+                    System.currentTimeMillis(),
+                    "\"MERGED\""
                 )
+            )
         )
         coEvery { deleter.deleteBranch(any()) }.returns(Unit)
         branchCheckScheduler.checkForFinishedBranches()

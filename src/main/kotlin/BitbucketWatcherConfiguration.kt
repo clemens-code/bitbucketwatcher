@@ -13,7 +13,6 @@ import io.github.clemenscode.bitbucketwatcher.client.BitbucketClient
 import io.github.clemenscode.bitbucketwatcher.client.TeamsClient
 import io.github.clemenscode.bitbucketwatcher.client.TelegramClient
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.context.annotation.Bean
