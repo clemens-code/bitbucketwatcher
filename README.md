@@ -3,7 +3,7 @@
 The BitbucketWatcher is a helpful tool to keep up to date with updates on your repo. 
 The Watcher tracks new PullRequests, status changes on code reviews, merged branches and forgotten branches. 
 
-- New opend PR’s
+- New opened PR’s
 - Review status change (per user) 
 - Merged pull requests 
 - Forgotten PR’s 
@@ -11,7 +11,16 @@ The Watcher tracks new PullRequests, status changes on code reviews, merged bran
 
 ## Supported Technology
 
-At the time only Bitbucket with the API 1.0 and Teams are supported. 
+### Repositories
+
+At the moment only Bitbucket is supported.
+
+### Message Channels 
+
+As message channels you can use Teams via the Webhook API or Telegram via the Bot API. You can use both or just one 
+of them. If no teams-url is provided Teams won't be used. If there is no token, Telegram won't be used.
+Make sure to configure at least one of them. The Watcher can also run without any message channel, but this doesn't make
+a lot of sense. 
 
 ## How to Start 
 
@@ -21,7 +30,7 @@ The Helm Charts can be checkout from [here](https://charts.mayope.net)
 
 ### Environment Variables 
 
-For the communikation with Bitbucket and Teams some variables are needed. 
+For the communication with Bitbucket and Teams some variables are needed. 
 In Kubernetes the easiest way to provide them is with a config-map. 
 
 #### Example for Config
@@ -50,6 +59,22 @@ metadata:
   namespace: default
 data:
   teams-url: https://og2gether.webhook.office.com/webhookb2/your-really-long-webhook
+  
+```
+  
+*Telegram Config*
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: telegram-credentials
+  namespace: default
+data:
+  telegram-url: telegram
+  bot: name of your bot
+  token: bot auth token
+  chat-id: id of the wanted chat 
 ```
 
 To apply them use `kubectl apply -f .\dataName.yaml`

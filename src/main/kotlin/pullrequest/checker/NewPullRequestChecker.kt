@@ -1,33 +1,21 @@
 package io.github.clemenscode.bitbucketwatcher.pullrequest.checker
 
-import io.github.clemenscode.bitbucketwatcher.client.TeamsClient
-import io.github.clemenscode.bitbucketwatcher.client.TelegramClient
-import io.github.clemenscode.bitbucketwatcher.client.builder.TeamsMessageBuilder
-import io.github.clemenscode.bitbucketwatcher.client.builder.TelegramMessageBuilder
+import io.github.clemenscode.bitbucketwatcher.client.builder.PullRequestMessages
 import io.github.clemenscode.bitbucketwatcher.logger.getLogger
 import io.github.clemenscode.bitbucketwatcher.model.PullRequest
+import io.github.clemenscode.bitbucketwatcher.notificator.PullRequestNotificator
 import org.springframework.stereotype.Component
 
 @Component
 internal class NewPullRequestChecker(
-    private val teamsClient: TeamsClient,
-    private val teamsMessageBuilder: TeamsMessageBuilder,
-    private val telegramClient: TelegramClient,
-    private val telegramMessageBuilder: TelegramMessageBuilder
+        private val pullRequestMessages: PullRequestMessages,
+        private val notificator: PullRequestNotificator
 ) {
 
     private val logger = getLogger(NewPullRequestChecker::class.java)
 
-    /**
-     * publishes the unknown PulLRequests
-     */
     fun publishNewPullRequests(pullRequest: PullRequest) {
-        teamsClient.postMessage(teamsMessageBuilder.newPRMessage(pullRequest))
-        telegramClient.postMessage(
-            telegramMessageBuilder.buildTelegramMessage(
-                "New PR ${pullRequest.title} from ${pullRequest.authorName}"
-            )
-        )
+        notificator.publish(pullRequestMessages.newPRMessage(pullRequest))
         logger.info("Just send a message to Teams and Telegram.")
     }
 }

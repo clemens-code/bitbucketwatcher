@@ -13,6 +13,7 @@ import io.github.clemenscode.bitbucketwatcher.client.BitbucketClient
 import io.github.clemenscode.bitbucketwatcher.client.TeamsClient
 import io.github.clemenscode.bitbucketwatcher.client.TelegramClient
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.context.annotation.Bean
@@ -36,7 +37,7 @@ class BitbucketWatcherConfiguration(
         registerModule(JavaTimeModule())
     }
 
-    @ConditionalOnProperty("bitbucket.base-url")
+    @ConditionalOnProperty(prefix = "bitbucket", name = ["base-url"])
     @Bean
     internal fun bitbucketClient(
         @Value("\${bitbucket.base-url}") connectorUrl: String,
@@ -51,7 +52,7 @@ class BitbucketWatcherConfiguration(
             target(BitbucketClient::class.java, connectorUrl)
         }
 
-    @ConditionalOnProperty("teams.url")
+    @ConditionalOnProperty(prefix = "teams", name = ["url"])
     @Bean
     internal fun teamsClient(
         @Value("\${teams.url}") connectorUrl: String,
@@ -62,12 +63,11 @@ class BitbucketWatcherConfiguration(
             encoder(JacksonEncoder(objectMapper))
             decoder(JacksonDecoder(objectMapper))
             decode404()
-            retryer(Retryer.NEVER_RETRY)
             options(Request.Options(connectTimeout, TimeUnit.SECONDS, readTimeout, TimeUnit.SECONDS, true))
             target(TeamsClient::class.java, connectorUrl)
         }
 
-    @ConditionalOnProperty("telegram.token")
+    @ConditionalOnProperty(prefix = "telegram", name = ["{token}"])
     @Bean
     internal fun telegramClient(
         @Value("\${telegram.url}") connectorUrl: String,

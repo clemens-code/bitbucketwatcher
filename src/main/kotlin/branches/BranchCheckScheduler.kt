@@ -1,11 +1,11 @@
 package io.github.clemenscode.bitbucketwatcher.branches
 
 import io.github.clemenscode.bitbucketwatcher.client.BitbucketClient
-import io.github.clemenscode.bitbucketwatcher.client.TeamsClient
-import io.github.clemenscode.bitbucketwatcher.client.builder.TeamsMessageBuilder
+import io.github.clemenscode.bitbucketwatcher.client.builder.PullRequestMessages
 import io.github.clemenscode.bitbucketwatcher.common.BitbucketConstants
 import io.github.clemenscode.bitbucketwatcher.logger.getLogger
 import io.github.clemenscode.bitbucketwatcher.model.Branch
+import io.github.clemenscode.bitbucketwatcher.notificator.PullRequestNotificator
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
 import org.springframework.scheduling.annotation.Scheduled
@@ -19,12 +19,12 @@ private const val MERGED = "\"MERGED\""
 
 @Component
 internal class BranchCheckScheduler(
-    private val branchBuilder: BranchBuilder,
-    private val bitbucketClient: BitbucketClient,
-    private val teamsClient: TeamsClient,
-    private val deleter: BranchDeleter,
-    private val teamsMessageBuilder: TeamsMessageBuilder,
-    private val bitbucketConstants: BitbucketConstants
+        private val branchBuilder: BranchBuilder,
+        private val bitbucketClient: BitbucketClient,
+        private val deleter: BranchDeleter,
+        private val pullRequestMessages: PullRequestMessages,
+        private val bitbucketConstants: BitbucketConstants,
+        private val notificator: PullRequestNotificator
 ) {
     private val logger = getLogger(BranchCheckScheduler::class.java)
 
@@ -64,7 +64,7 @@ internal class BranchCheckScheduler(
             .filter { !publishedBranches.contains(it) }
             .forEach {
                 publishedBranches.add(it)
-                teamsClient.postMessage(teamsMessageBuilder.oldBranchMessage(it))
+                notificator.publish(pullRequestMessages.oldBranchMessage(it))
             }
     }
 

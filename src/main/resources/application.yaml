@@ -8,7 +8,7 @@ teams:
     connectTimeout: 6
 
 telegram:
-    url: https://api.telegram.org/bot
+    url: ${telegram-url}
     bot: ${bot-name}
     token: ${token}
     chat-id: ${chat-id}
@@ -16,7 +16,7 @@ telegram:
     connectTimeout: 6
 
 bitbucket:
-    base-url: https://bitbucket.otto.de/
+    base-url: ${base-url}
     readTimeout: 600
     connectTimeout: 6
     project-key: ${project-key}
