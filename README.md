@@ -3,7 +3,7 @@
 The BitbucketWatcher is a helpful tool to keep up to date with updates on your repo. 
 The Watcher tracks new PullRequests, status changes on code reviews, merged branches and forgotten branches. 
 
-- New opend PR’s
+- New opened PR’s
 - Review status change (per user) 
 - Merged pull requests 
 - Forgotten PR’s 
@@ -11,10 +11,16 @@ The Watcher tracks new PullRequests, status changes on code reviews, merged bran
 
 ## Supported Technology
 
-As Repository is only Bitbucket is supported. 
-As message channels Teams and Telegram are supported. 
-Teams via the webhook API and Telegram via the Bot API. 
-You can either use both of them or only one. 
+### Repositories
+
+At the moment only Bitbucket is supported.
+
+### Message Channels 
+
+As message channels you can use Teams via the Webhook API or Telegram via the Bot API. You can use both or just one 
+of them. If no teams-url is provided Teams won't be used. If there is no token, Telegram won't be used.
+Make sure to configure at least one of them. The Watcher can also run without any message channel, but this doesn't make
+a lot of sense. 
 
 ## How to Start 
 
