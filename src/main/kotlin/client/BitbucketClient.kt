@@ -35,5 +35,5 @@ interface BitbucketClient {
         @Param("project") project: String,
         @Param("reposlug") slug: String,
         branchDeleteRequestModel: BranchDeleteRequestModel
-    ): ObjectNode
+    ): ObjectNode?
 }

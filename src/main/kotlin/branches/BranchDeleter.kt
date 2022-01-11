@@ -14,13 +14,16 @@ internal class BranchDeleter(
 
     private val logger = getLogger(BranchDeleter::class.java)
 
+    /**
+     * If the deletion isn't successful it is expected that Bitbucket automatically has deleted the merged Branch.
+     */
     fun deleteBranch(id: String) {
         val cutId = removeQuotes(id)
         logger.info("Sending delete request for $cutId")
         if (id != MASTER_ID) {
-            client.deleteBranchById(constants.projectKey, constants.repoSlug, BranchDeleteRequestModel(cutId)).let {
+            client.deleteBranchById(constants.projectKey, constants.repoSlug, BranchDeleteRequestModel(cutId))?.let {
                 if (it.isEmpty) {
-                    logger.error("Failed to delete $cutId. Response from Bitbucket: $it")
+                    logger.warn("Failed to delete $cutId. Response from Bitbucket: $it")
                 } else {
                     logger.info("Successfully $cutId deleted")
                 }
